@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CU Boulder Nordic Ski Club – GEEN 2400</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ice: #d6eaf8;
+    --deep: #0a1f3c;
+    --slate: #1b3a5c;
+    --teal: #1a6b7c;
+    --frost: #a8d8ea;
+    --white: #f5f9fc;
+    --accent: #4fc3e8;
+    --gold: #c8a84b;
+    --text: #1c2b3a;
+    --muted: #4a6580;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(10, 31, 60, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(79, 195, 232, 0.18);
+    transition: padding 0.3s;
+  }
+  nav.scrolled { padding: 0.8rem 3rem; }
+
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--frost);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,249,252,0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+    padding-bottom: 4px;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1px; background: var(--accent);
+    transform: scaleX(0); transition: transform 0.25s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+  .nav-links a.active { color: var(--white); }
+
+  /* ── PAGE SECTIONS ── */
+  .page { display: none; padding-top: 72px; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; height: calc(100vh - 72px);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    overflow: hidden;
+    background: linear-gradient(160deg, #0a1f3c 0%, #0e3050 45%, #0d4a60 100%);
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(79,195,232,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 80% 20%, rgba(26,107,124,0.12) 0%, transparent 60%);
+  }
+
+  /* Geometric shapes */
+  .hero-shapes { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .shape {
+    position: absolute;
+    border: 1px solid rgba(79,195,232,0.1);
+  }
+  .shape-1 {
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    top: -120px; right: -100px;
+    background: radial-gradient(circle, rgba(79,195,232,0.04) 0%, transparent 70%);
+    animation: floatA 18s ease-in-out infinite;
+  }
+  .shape-2 {
+    width: 300px; height: 300px;
+    bottom: -60px; left: -60px;
+    background: radial-gradient(circle, rgba(26,107,124,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatB 14s ease-in-out infinite;
+  }
+  .shape-3 {
+    width: 200px; height: 200px;
+    top: 30%; left: 10%;
+    border: 1px solid rgba(79,195,232,0.08);
+    transform: rotate(45deg);
+    animation: floatC 20s ease-in-out infinite;
+  }
+
+  /* Snow particles */
+  .snow { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .flake {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: fall linear infinite;
+  }
+
+  @keyframes floatA { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-30px) scale(1.04)} }
+  @keyframes floatB { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-20px) rotate(10deg)} }
+  @keyframes floatC { 0%,100%{transform:rotate(45deg) scale(1)} 50%{transform:rotate(65deg) scale(1.1)} }
+  @keyframes fall {
+    0% { transform: translateY(-20px) translateX(0); opacity: 0.6; }
+    100% { transform: translateY(110vh) translateX(40px); opacity: 0; }
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; padding: 2rem;
+    animation: fadeUp 1s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 1s 0.35s ease both;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: rgba(245,249,252,0.65);
+    font-weight: 300;
+    max-width: 520px; margin: 0 auto 2.5rem;
+    line-height: 1.7;
+    animation: fadeUp 1s 0.5s ease both;
+  }
+
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.85rem 2rem;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    animation: fadeUp 1s 0.65s ease both;
+  }
+  .hero-cta:hover {
+    background: var(--accent);
+    color: var(--deep);
+  }
+
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    z-index: 2;
+    animation: fadeUp 1s 1s ease both;
+  }
+  .hero-scroll span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.2em;
+    color: rgba(245,249,252,0.4); text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, rgba(79,195,232,0.5), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse { 0%,100%{opacity:0.5;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(0.6)} }
+
+  /* ── MISSION STRIP ── */
+  .mission-strip {
+    background: var(--deep);
+    padding: 4rem 0;
+    overflow: hidden;
+  }
+  .mission-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 2fr;
+    gap: 4rem; align-items: center;
+    padding: 0 3rem;
+  }
+  .mission-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .mission-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: var(--white);
+    line-height: 1.1;
+    font-weight: 700;
+  }
+  .mission-text {
+    font-size: 1rem;
+    color: rgba(245,249,252,0.72);
+    line-height: 1.8;
+    font-weight: 300;
+    border-left: 2px solid var(--teal);
+    padding-left: 1.5rem;
+  }
+  .mission-text + .mission-text { margin-top: 1.2rem; }
+
+  /* ── SECTION BASE ── */
+  section {
+    max-width: 1100px; margin: 0 auto;
+    padding: 5rem 3rem;
+  }
+
+  .section-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.25em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    color: var(--deep);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .divider {
+    width: 60px; height: 2px;
+    background: linear-gradient(to right, var(--accent), transparent);
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── PAGE HEROES ── */
+  .page-hero {
+    height: 360px;
+    display: flex; align-items: flex-end;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #0a1f3c 0%, #0e3050 60%, #0c4055 100%);
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 80% at 80% 50%, rgba(79,195,232,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 20% 80%, rgba(26,107,124,0.1) 0%, transparent 60%);
+  }
+  .page-hero-content { position: relative; z-index: 1; max-width: 1100px; width: 100%; margin: 0 auto; }
+  .page-hero-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem; font-weight: 900;
+    color: rgba(79,195,232,0.06);
+    position: absolute; right: 3rem; bottom: -1rem;
+    line-height: 1; pointer-events: none;
+    font-style: italic;
+  }
+  .page-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.0;
+    margin-bottom: 0.5rem;
+  }
+  .page-hero p {
+    font-size: 0.9rem;
+    color: rgba(245,249,252,0.55);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* ── CARDS ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .card {
+    background: white;
+    border: 1px solid rgba(10,31,60,0.08);
+    padding: 2.2rem;
+    position: relative;
+    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 2px 20px rgba(10,31,60,0.05);
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(10,31,60,0.12);
+  }
+  .card-icon {
+    font-size: 2rem; margin-bottom: 1.2rem;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--deep); margin-bottom: 0.8rem;
+  }
+  .card-text {
+    font-size: 0.92rem; color: var(--muted);
+    line-height: 1.75; font-weight: 300;
+  }
+  .card-accent {
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  /* ── ABOUT CLIENT ── */
+  .client-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-top: 3rem;
+  }
+  .client-block { }
+  .client-block-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .client-block-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--deep); margin-bottom: 1rem;
+  }
+  .client-block-text {
+    font-size: 0.95rem; color: var(--muted);
+    line-height: 1.8; font-weight: 300;
+  }
+
+  .stat-row {
+    display: flex; gap: 2rem; margin-top: 3rem;
+  }
+  .stat {
+    flex: 1; padding: 1.8rem;
+    background: var(--deep);
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem; font-weight: 900;
+    color: var(--accent);
+    font-style: italic;
+  }
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem; color: rgba(245,249,252,0.6);
+    margin-top: 0.3rem; text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .gap-box {
+    margin-top: 3rem;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, var(--deep) 0%, var(--slate) 100%);
+    position: relative; overflow: hidden;
+  }
+  .gap-box::after {
+    content: '⚠';
+    position: absolute; right: 2rem; top: 50%;
+    transform: translateY(-50%);
+    font-size: 6rem; opacity: 0.05; pointer-events: none;
+  }
+  .gap-box-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .gap-box-text {
+    font-size: 1rem; color: rgba(245,249,252,0.85);
+    line-height: 1.8; font-weight: 300;
+    max-width: 700px;
+  }
+
+  /* ── PROBLEMS ── */
+  .problem-intro {
+    max-width: 800px;
+    font-size: 1.05rem; color: var(--muted);
+    line-height: 1.85; font-weight: 300;
+    margin-top: 2rem;
+  }
+  .problem-intro strong { color: var(--deep); font-weight: 500; }
+
+  .problem-list {
+    margin-top: 3.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .problem-item {
+    padding: 2rem;
+    border: 1px solid rgba(10,31,60,0.1);
+    position: relative;
+    background: white;
+    box-shadow: 0 2px 12px rgba(10,31,60,0.04);
+    transition: all 0.25s;
+  }
+  .problem-item:hover { box-shadow: 0 8px 30px rgba(10,31,60,0.1); transform: translateY(-3px); }
+  .problem-item-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; font-weight: 900;
+    color: rgba(10,31,60,0.04);
+    position: absolute; top: 1rem; right: 1.5rem;
+    font-style: italic; line-height: 1;
+  }
+  .problem-item-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .problem-item-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--deep); margin-bottom: 0.6rem;
+  }
+  .problem-item-text { font-size: 0.88rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+  .problem-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--teal), var(--accent));
+    transform: scaleX(0);
+    transition: transform 0.4s;
+    transform-origin: left;
+  }
+  .problem-item:hover .problem-bar { transform: scaleX(1); }
+
+  .klister-explainer {
+    margin-top: 4rem;
+    padding: 3rem;
+    background: linear-gradient(135deg, #0a1f3c 0%, #0e3a55 100%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: center;
+  }
+  .ke-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 700;
+    color: var(--white); margin-bottom: 1rem;
+    font-style: italic;
+  }
+  .ke-text { font-size: 0.93rem; color: rgba(245,249,252,0.72); line-height: 1.8; font-weight: 300; }
+  .ke-step-list { display: flex; flex-direction: column; gap: 1rem; }
+  .ke-step {
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .ke-step-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    padding: 0.3rem 0.5rem;
+    border: 1px solid rgba(79,195,232,0.3);
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .ke-step-text { font-size: 0.88rem; color: rgba(245,249,252,0.7); line-height: 1.6; font-weight: 300; }
+
+  /* ── SOLUTIONS ── */
+  .solutions-intro {
+    max-width: 750px;
+    font-size: 1.05rem; color: var(--muted);
+    line-height: 1.85; font-weight: 300; margin-top: 2rem;
+  }
+
+  .solution-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .feature {
+    padding: 2.5rem 2rem;
+    background: white;
+    border: 1px solid rgba(10,31,60,0.08);
+    text-align: center;
+    transition: all 0.25s;
+    box-shadow: 0 2px 12px rgba(10,31,60,0.04);
+  }
+  .feature:hover { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(10,31,60,0.1); }
+  .feature-icon { font-size: 2.5rem; margin-bottom: 1.2rem; }
+  .feature-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--deep); margin-bottom: 0.7rem;
+  }
+  .feature-text { font-size: 0.88rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+  .design-brief {
+    margin-top: 4rem;
+    padding: 3.5rem;
+    background: var(--deep);
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .brief-divider { background: rgba(79,195,232,0.2); }
+  .brief-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .brief-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 700;
+    color: var(--white); margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .brief-text { font-size: 0.9rem; color: rgba(245,249,252,0.65); line-height: 1.8; font-weight: 300; }
+
+  .criteria-list {
+    display: flex; flex-direction: column; gap: 0.8rem;
+  }
+  .criteria-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.9rem 1.2rem;
+    background: rgba(79,195,232,0.05);
+    border-left: 2px solid rgba(79,195,232,0.3);
+  }
+  .criteria-check { color: var(--accent); font-size: 1rem; }
+  .criteria-text { font-size: 0.87rem; color: rgba(245,249,252,0.75); font-weight: 300; }
+
+  /* ── PROTOTYPES ── */
+  .proto-intro {
+    max-width: 750px;
+    font-size: 1.05rem; color: var(--muted);
+    line-height: 1.85; font-weight: 300; margin-top: 2rem;
+  }
+
+  .proto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3.5rem;
+  }
+
+  .proto-card {
+    border: 1px solid rgba(10,31,60,0.1);
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 16px rgba(10,31,60,0.05);
+    transition: all 0.3s;
+  }
+  .proto-card:hover { box-shadow: 0 16px 50px rgba(10,31,60,0.12); transform: translateY(-4px); }
+
+  .proto-card-header {
+    background: linear-gradient(135deg, var(--deep) 0%, var(--slate) 100%);
+    padding: 2rem;
+    position: relative; overflow: hidden;
+  }
+  .proto-card-header::before {
+    content: attr(data-num);
+    position: absolute; right: 1.5rem; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem; font-weight: 900; font-style: italic;
+    color: rgba(255,255,255,0.05); line-height: 1;
+  }
+  .proto-status {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.2em;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .proto-status.preferred { color: #5ce8a0; border-color: rgba(92,232,160,0.4); }
+  .proto-status.considered { color: var(--accent); border-color: rgba(79,195,232,0.4); }
+  .proto-status.declined { color: #e87c5c; border-color: rgba(232,124,92,0.4); }
+
+  .proto-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--white); line-height: 1.2;
+  }
+  .proto-card-body { padding: 2rem; }
+
+  .proto-section {
+    margin-bottom: 1.5rem;
+  }
+  .proto-section:last-child { margin-bottom: 0; }
+  .proto-section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .proto-section-text {
+    font-size: 0.88rem; color: var(--muted);
+    line-height: 1.7; font-weight: 300;
+  }
+
+  .feedback-box {
+    margin-top: 4rem;
+    padding: 3rem;
+    background: linear-gradient(135deg, #0d3552 0%, #0a2540 100%);
+    border-left: 3px solid var(--gold);
+  }
+  .feedback-box-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+  .feedback-box-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--white); margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .next-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  .next-step {
+    padding: 1.3rem;
+    background: rgba(79,195,232,0.05);
+    border: 1px solid rgba(79,195,232,0.12);
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .next-step-arrow {
+    color: var(--accent); font-size: 1rem; flex-shrink: 0; margin-top: 2px;
+  }
+  .next-step-text {
+    font-size: 0.85rem; color: rgba(245,249,252,0.75); line-height: 1.6; font-weight: 300;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep);
+    padding: 4rem 3rem 3rem;
+    margin-top: 0;
+    border-top: 1px solid rgba(79,195,232,0.1);
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--white); margin-bottom: 0.8rem;
+    font-style: italic;
+  }
+  .footer-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.15em;
+    color: rgba(245,249,252,0.4); text-transform: uppercase;
+    line-height: 1.6;
+  }
+  .footer-col-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .footer-col-links { list-style: none; }
+  .footer-col-links li { margin-bottom: 0.6rem; }
+  .footer-col-links a {
+    font-size: 0.88rem; color: rgba(245,249,252,0.55);
+    text-decoration: none; transition: color 0.2s;
+    font-weight: 300;
+  }
+  .footer-col-links a:hover { color: var(--white); }
+  .footer-bottom {
+    max-width: 1100px; margin: 3rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-copy {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.1em;
+    color: rgba(245,249,252,0.3);
+  }
+
+  /* ── SCROLLFADE ── */
+  .scroll-reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .mission-inner { grid-template-columns: 1fr; gap: 2rem; }
+    section { padding: 3rem 1.5rem; }
+    .client-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .stat-row { flex-wrap: wrap; }
+    .proto-grid { grid-template-columns: 1fr; }
+    .klister-explainer { grid-template-columns: 1fr; gap: 2rem; }
+    .design-brief { grid-template-columns: 1fr; }
+    .brief-divider { display: none; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; }
+    .hero-title { font-size: 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-logo">
+    CU Boulder<br><span>Nordic Ski Club</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a href="#" onclick="showPage('client')" id="nav-client">Client</a></li>
+    <li><a href="#" onclick="showPage('problems')" id="nav-problems">Problems</a></li>
+    <li><a href="#" onclick="showPage('solutions')" id="nav-solutions">Solutions</a></li>
+    <li><a href="#" onclick="showPage('prototypes')" id="nav-prototypes">Prototypes</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HOME PAGE
+══════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    <div class="snow" id="snow"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">GEEN 2400 · Engineering for Community · Spring 2026</p>
+      <h1 class="hero-title">Wax<em>Smart</em><br>Applicator</h1>
+      <p class="hero-sub">Redesigning how cross-country skiers apply klister wax — making the process cleaner, faster, and more consistent for all conditions.</p>
+      <button class="hero-cta" onclick="showPage('client')">Explore Project →</button>
+    </div>
+
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+
+  <div class="mission-strip">
+    <div class="mission-inner">
+      <div>
+        <p class="mission-label">Our Mission</p>
+        <h2 class="mission-heading">Engineering<br>for real<br>people.</h2>
+      </div>
+      <div>
+        <p class="mission-text">As part of the GEEN 2400: Engineering for the Community curriculum, our team is engaged in a client-based design experience focused on enhancing health, safety, and quality of life. We apply the engineering design process to solve a critical challenge within a professional environment.</p>
+        <p class="mission-text" style="margin-top:1.2rem;">We are collaborating directly with the CU Boulder Nordic Ski Club to address a specific need in improving the application of waxing skis, promoting health and wellness through cross-country skiing. Through regular communication with our client, we are developing a practical, innovative, and user-friendly product that will improve cross-country skiing for all.</p>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <p class="section-tag">What We're Solving</p>
+    <h2 class="section-title">Three Focus<br>Areas</h2>
+    <div class="divider"></div>
+    <div class="card-grid scroll-reveal">
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-icon">🏔️</div>
+        <h3 class="card-title">Client Partnership</h3>
+        <p class="card-text">Working directly with the CU Boulder Nordic Ski Club — a passionate community of skiers founded in 2023 — to understand real-world needs and constraints on the trail.</p>
+      </div>
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-icon">❄️</div>
+        <h3 class="card-title">Problem Identification</h3>
+        <p class="card-text">Klister wax application is messy, inconsistent, and time-consuming. We've identified the core pain points that make the process frustrating in cold, outdoor conditions.</p>
+      </div>
+      <div class="card">
+        <div class="card-accent"></div>
+        <div class="card-icon">⚙️</div>
+        <h3 class="card-title">Innovative Solutions</h3>
+        <p class="card-text">Our prototypes address cleanliness, temperature control, ease of application, and consistency — creating a product that any skier can use confidently before a race or outing.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     CLIENT PAGE
+══════════════════════════════════════════ -->
+<div id="page-client" class="page">
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="page-hero-number">01</div>
+      <p style="font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.22em;color:var(--accent);text-transform:uppercase;margin-bottom:0.8rem;">Our Partner</p>
+      <h1>CU Boulder<br>Nordic Ski Club</h1>
+      <p>Founded 2023 · Boulder, Colorado</p>
+    </div>
+  </div>
+
+  <section>
+    <p class="section-tag">About Our Client</p>
+    <h2 class="section-title">Who They Are</h2>
+    <div class="divider"></div>
+
+    <div class="client-grid scroll-reveal">
+      <div>
+        <div class="client-block" style="margin-bottom:2.5rem;">
+          <p class="client-block-label">Identity</p>
+          <h3 class="client-block-title">An All-Inclusive Ski Community</h3>
+          <p class="client-block-text">Founded in 2023, the CU Boulder Nordic Ski Club is an all-inclusive school organization for students of all Nordic ski levels. Whether you join to compete or want to learn Nordic skiing, this club offers a variety of events throughout the school year and a vibrant community of skiers to make lasting memories.</p>
+        </div>
+        <div class="client-block">
+          <p class="client-block-label">Activities</p>
+          <h3 class="client-block-title">What They Do</h3>
+          <p class="client-block-text">The Nordic Ski Club offers weekly ski outings, bi-weekly day trips, two overnight trips, competitions, and social events. Members range from total beginners to experienced racers, all united by a love of cross-country skiing in Colorado's stunning mountain terrain.</p>
+        </div>
+      </div>
+      <div>
+        <div class="stat-row" style="flex-direction:column;gap:1rem;">
+          <div class="stat">
+            <div class="stat-num">2023</div>
+            <div class="stat-label">Year Founded</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">Weekly</div>
+            <div class="stat-label">Ski Outings</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">All Levels</div>
+            <div class="stat-label">Welcoming Beginners to Racers</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-box scroll-reveal">
+      <p class="gap-box-label">The Capability Gap</p>
+      <p class="gap-box-text">An essential part of Nordic skiing is prepping your skis for challenging conditions. In order to do this, klister wax must be applied to skis to provide optimal grip and preserve glide. The application process can be messy, time-consuming, and highly inconsistent — which is why the Nordic Ski Club has trusted us with developing a product to simplify this critical process, making the sport more accessible and enjoyable for every member.</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     PROBLEMS PAGE
+══════════════════════════════════════════ -->
+<div id="page-problems" class="page">
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="page-hero-number">02</div>
+      <p style="font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.22em;color:var(--accent);text-transform:uppercase;margin-bottom:0.8rem;">Root Issues</p>
+      <h1>The<br>Problems</h1>
+      <p>Why klister wax needs a better solution</p>
+    </div>
+  </div>
+
+  <section>
+    <p class="section-tag">Problem Statement</p>
+    <h2 class="section-title">What Makes<br>Klister Difficult?</h2>
+    <div class="divider"></div>
+
+    <p class="problem-intro scroll-reveal">
+      <strong>Klister</strong> is a tacky wax applied to the bottom of skis to provide grip for cross-country skiers. It is used for icy, wet, or slushy conditions where traditional hard wax does not work. The application process includes heating the wax and carefully applying thin layers to the middle section of the ski, known as the kick zone. This improves kick-and-glide performance in tough conditions.
+      <br><br>
+      Our team is creating an innovative product to address the current application process that the Nordic Ski Club has brought to our attention: <strong>Klister wax is difficult to apply because it requires careful temperature control, precise spreading, and thorough cleanup — making the process time-consuming, inconsistent, and inconvenient, especially in cold outdoor conditions.</strong>
+    </p>
+
+    <div class="problem-list scroll-reveal">
+      <div class="problem-item">
+        <div class="problem-bar"></div>
+        <div class="problem-item-num">01</div>
+        <div class="problem-item-icon">🤲</div>
+        <h3 class="problem-item-title">Cleanliness</h3>
+        <p class="problem-item-text">Klister is extremely sticky and can get all over hands, clothing, ski bags, and equipment. Once it transfers, it's nearly impossible to remove without solvents — making it one of the most frustrating aspects of the process.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-bar"></div>
+        <div class="problem-item-num">02</div>
+        <div class="problem-item-icon">🌡️</div>
+        <h3 class="problem-item-title">Temperature Control</h3>
+        <p class="problem-item-text">Klister must be warmed to the right viscosity before it spreads evenly. Too cold and it won't spread; too hot and it drips or becomes unmanageably thin. Achieving the right temperature outdoors in winter is particularly challenging.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-bar"></div>
+        <div class="problem-item-num">03</div>
+        <div class="problem-item-icon">⏱️</div>
+        <h3 class="problem-item-title">Time Consumption</h3>
+        <p class="problem-item-text">Current application requires heating the wax, carefully spreading thin layers, waiting for each layer to set, and then cleaning up. This multi-step process can take 15–30 minutes and is difficult to do well before a race or outing.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-bar"></div>
+        <div class="problem-item-num">04</div>
+        <div class="problem-item-icon">📏</div>
+        <h3 class="problem-item-title">Inconsistent Results</h3>
+        <p class="problem-item-text">Without a precise tool, the thickness and coverage of klister application varies significantly. Uneven coverage leads to poor kick-and-glide performance, requiring the skier to re-apply and waste wax.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-bar"></div>
+        <div class="problem-item-num">05</div>
+        <div class="problem-item-icon">🧤</div>
+        <h3 class="problem-item-title">Outdoor Inconvenience</h3>
+        <p class="problem-item-text">Application typically happens at trailheads or parking lots in cold weather. Wearing gloves makes precise application nearly impossible, yet bare hands lead to contamination. Current tools are not designed for outdoor use.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-bar"></div>
+        <div class="problem-item-num">06</div>
+        <div class="problem-item-icon">📦</div>
+        <h3 class="problem-item-title">Portability</h3>
+        <p class="problem-item-text">Current klister comes in tubes that can leak in ski bags, contaminating gear. There is no self-contained, mess-free system that skiers can bring to the trailhead and use confidently without worrying about spills.</p>
+      </div>
+    </div>
+
+    <div class="klister-explainer scroll-reveal">
+      <div>
+        <h3 class="ke-title">The Traditional Application Process</h3>
+        <p class="ke-text">Understanding how klister is currently applied helps explain why each step creates frustration. Our design goal is to simplify or eliminate as many of these steps as possible.</p>
+      </div>
+      <div class="ke-step-list">
+        <div class="ke-step">
+          <span class="ke-step-num">01</span>
+          <p class="ke-step-text">Warm the klister tube with body heat or a small torch until pliable</p>
+        </div>
+        <div class="ke-step">
+          <span class="ke-step-num">02</span>
+          <p class="ke-step-text">Squeeze thin beads of wax onto the kick zone of the ski base</p>
+        </div>
+        <div class="ke-step">
+          <span class="ke-step-num">03</span>
+          <p class="ke-step-text">Spread evenly with a scraper or finger (major contamination risk)</p>
+        </div>
+        <div class="ke-step">
+          <span class="ke-step-num">04</span>
+          <p class="ke-step-text">Allow to partially set before skiing</p>
+        </div>
+        <div class="ke-step">
+          <span class="ke-step-num">05</span>
+          <p class="ke-step-text">Clean all tools, hands, and any contaminated surfaces after use</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     SOLUTIONS PAGE
+══════════════════════════════════════════ -->
+<div id="page-solutions" class="page">
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="page-hero-number">03</div>
+      <p style="font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.22em;color:var(--accent);text-transform:uppercase;margin-bottom:0.8rem;">Our Approach</p>
+      <h1>The<br>Solutions</h1>
+      <p>Engineering a better wax application experience</p>
+    </div>
+  </div>
+
+  <section>
+    <p class="section-tag">Design Direction</p>
+    <h2 class="section-title">Core Design<br>Principles</h2>
+    <div class="divider"></div>
+    <p class="solutions-intro scroll-reveal">Our solution must address every identified pain point while remaining practical for real-world use at trailheads and race venues. We've established four guiding principles that every prototype must satisfy to be considered viable.</p>
+
+    <div class="solution-features scroll-reveal">
+      <div class="feature">
+        <div class="feature-icon">🧼</div>
+        <h3 class="feature-title">Zero-Contact Mess</h3>
+        <p class="feature-text">The applicator must prevent klister from contacting hands or gear. A self-contained system keeps everything isolated until the wax hits the ski base.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">Precision Application</h3>
+        <p class="feature-text">Consistent, even coverage every time. The design should guide the skier through correct application without requiring expertise or a heating torch.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <h3 class="feature-title">Speed & Simplicity</h3>
+        <p class="feature-text">Application time should be under 5 minutes. Anyone — beginner or expert — should be able to use the product successfully on their first attempt.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎿</div>
+        <h3 class="feature-title">Trail-Ready Design</h3>
+        <p class="feature-text">Must function in cold temperatures, work with gloves on, and be compact enough to fit in a standard ski bag without risk of leakage.</p>
+      </div>
+    </div>
+
+    <div class="design-brief scroll-reveal">
+      <div>
+        <p class="brief-label">Problem Statement</p>
+        <h3 class="brief-title">The Engineering Challenge We're Solving</h3>
+        <p class="brief-text">How might we design a portable klister wax applicator that delivers consistent, mess-free application for cross-country skiers of all skill levels, in cold outdoor conditions, in under 5 minutes?</p>
+      </div>
+      <div class="brief-divider"></div>
+      <div>
+        <p class="brief-label">Design Criteria</p>
+        <div class="criteria-list">
+          <div class="criteria-item">
+            <span class="criteria-check">✓</span>
+            <span class="criteria-text">No direct hand contact with klister wax during application</span>
+          </div>
+          <div class="criteria-item">
+            <span class="criteria-check">✓</span>
+            <span class="criteria-text">Functions in temperatures below 20°F (-7°C)</span>
+          </div>
+          <div class="criteria-item">
+            <span class="criteria-check">✓</span>
+            <span class="criteria-text">Complete application in under 5 minutes</span>
+          </div>
+          <div class="criteria-item">
+            <span class="criteria-check">✓</span>
+            <span class="criteria-text">Compatible with standard klister tubes or cartridges</span>
+          </div>
+          <div class="criteria-item">
+            <span class="criteria-check">✓</span>
+            <span class="criteria-text">Fits within a standard ski bag or backpack</span>
+          </div>
+          <div class="criteria-item">
+            <span class="criteria-check">✓</span>
+            <span class="criteria-text">Usable while wearing ski gloves</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     PROTOTYPES PAGE
+══════════════════════════════════════════ -->
+<div id="page-prototypes" class="page">
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="page-hero-number">04</div>
+      <p style="font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.22em;color:var(--accent);text-transform:uppercase;margin-bottom:0.8rem;">Design Iterations</p>
+      <h1>Prototypes &<br>Client Feedback</h1>
+      <p>Reviewed with CU Boulder Nordic Ski Club · February 2026</p>
+    </div>
+  </div>
+
+  <section>
+    <p class="section-tag">Prototype Review</p>
+    <h2 class="section-title">Our Concepts &<br>Client Response</h2>
+    <div class="divider"></div>
+    <p class="proto-intro scroll-reveal">We presented three distinct prototype concepts to the CU Boulder Nordic Ski Club during our client review session. Below is a detailed summary of client feedback, including which concepts they preferred, which they did not, and what specific improvements they requested. This feedback directly shapes our next iteration.</p>
+
+    <div class="proto-grid scroll-reveal">
+
+      <!-- PROTOTYPE 1 -->
+      <div class="proto-card">
+        <div class="proto-card-header" data-num="A">
+          <span class="proto-status preferred">★ Most Preferred</span>
+          <h3 class="proto-card-title">Roller Applicator with Integrated Heating</h3>
+        </div>
+        <div class="proto-card-body">
+          <div class="proto-section">
+            <p class="proto-section-label">Concept Description</p>
+            <p class="proto-section-text">A handheld roller device that heats klister to optimal viscosity via a small integrated heating coil, then rolls it evenly onto the ski base. The wax is contained in a sealed cartridge and never touches the user's hands.</p>
+          </div>
+          <div class="proto-section">
+            <p class="proto-section-label">Why the Client Preferred It</p>
+            <p class="proto-section-text">The client was most excited by the integrated heating feature, noting that temperature control is their biggest frustration. They appreciated the roller mechanism for providing consistent coverage and that the cartridge system keeps everything contained. Club members specifically mentioned that "not having to touch the wax at all" was a major selling point.</p>
+          </div>
+          <div class="proto-section">
+            <p class="proto-section-label">Client-Requested Improvements</p>
+            <p class="proto-section-text">The client asked whether the heating element could be battery-powered and rechargeable rather than requiring an open flame. They also requested a wider roller head to cover more of the kick zone in fewer passes, and a built-in scraper on the back edge to smooth the final layer.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROTOTYPE 2 -->
+      <div class="proto-card">
+        <div class="proto-card-header" data-num="B">
+          <span class="proto-status considered">◈ Considered – Needs Refinement</span>
+          <h3 class="proto-card-title">Glove-Mounted Applicator Pad</h3>
+        </div>
+        <div class="proto-card-body">
+          <div class="proto-section">
+            <p class="proto-section-label">Concept Description</p>
+            <p class="proto-section-text">A silicone applicator pad worn on the palm of the hand, pre-loaded with a measured amount of klister. The skier uses natural spreading motion to apply the wax while the silicone barrier prevents direct skin contact.</p>
+          </div>
+          <div class="proto-section">
+            <p class="proto-section-label">Client's Mixed Response</p>
+            <p class="proto-section-text">The client found this concept clever and appreciated its simplicity and low cost. However, they expressed concern that the spreading motion still relies heavily on hand pressure and warmth, which varies between users. They also noted it does not solve the temperature-control problem and questioned how the pad would be cleaned or replaced between uses.</p>
+          </div>
+          <div class="proto-section">
+            <p class="proto-section-label">Suggested Improvements</p>
+            <p class="proto-section-text">The client suggested exploring disposable or washable pad inserts. They also recommended adding a textured pattern to the pad surface to improve spreading consistency. If cost could be kept very low, they saw this as a useful complementary tool alongside the roller, but not as a standalone solution.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROTOTYPE 3 -->
+      <div class="proto-card">
+        <div class="proto-card-header" data-num="C">
+          <span class="proto-status declined">✕ Not Preferred</span>
+          <h3 class="proto-card-title">Squeeze-Tube Guided Nozzle</h3>
+        </div>
+        <div class="proto-card-body">
+          <div class="proto-section">
+            <p class="proto-section-label">Concept Description</p>
+            <p class="proto-section-text">A modified nozzle attachment for standard klister tubes that features a wide, flat opening and a built-in guide rail that rests on the ski edge to maintain consistent application height and width as the tube is dragged along the ski.</p>
+          </div>
+          <div class="proto-section">
+            <p class="proto-section-label">Why the Client Did Not Prefer It</p>
+            <p class="proto-section-text">While the client acknowledged this was the most affordable concept, they felt it didn't meaningfully improve the existing process enough to justify adoption. The wax still needs to be spread after application, and the guide rail added bulk without solving the mess or temperature problems. One member noted, "It's just a fancier tube."</p>
+          </div>
+          <div class="proto-section">
+            <p class="proto-section-label">Feedback on Limitations</p>
+            <p class="proto-section-text">The client felt this prototype addressed only one of the six identified problem areas (inconsistent width) while ignoring cleanliness, temperature, speed, and portability. They encouraged us to either significantly expand its functionality or combine its guided-application concept into the roller prototype as an accessory feature.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROTOTYPE 4 - Summary -->
+      <div class="proto-card">
+        <div class="proto-card-header" data-num="→">
+          <span class="proto-status preferred">→ Next Iteration</span>
+          <h3 class="proto-card-title">Refined Roller v2 — Incorporating All Feedback</h3>
+        </div>
+        <div class="proto-card-body">
+          <div class="proto-section">
+            <p class="proto-section-label">How We're Moving Forward</p>
+            <p class="proto-section-text">Based on client feedback, our next prototype will be a refined version of the roller applicator. We will incorporate the rechargeable heating element, a wider roller head (50mm), an integrated edge scraper, and a guide rail inspired by Prototype C to ensure consistent application position on the ski.</p>
+          </div>
+          <div class="proto-section">
+            <p class="proto-section-label">Design Changes to Implement</p>
+            <p class="proto-section-text">We plan to 3D-print an updated housing with room for a USB-C rechargeable heating core, sourced through our electronics supplier. The cartridge system will be redesigned to be single-use recyclable or refillable. We will also prototype the integrated edge guide from the nozzle concept.</p>
+          </div>
+          <div class="proto-section">
+            <p class="proto-section-label">Testing Plan</p>
+            <p class="proto-section-text">We will test the v2 prototype at the club's next outing at Eldora Mountain. Metrics include: application time, coverage consistency, user-rated cleanliness, and ease of use for novice members. Results will be presented at our next client meeting.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CLIENT FEEDBACK SUMMARY -->
+    <div class="feedback-box scroll-reveal">
+      <p class="feedback-box-label">Overall Client Feedback Summary</p>
+      <h3 class="feedback-box-title">"The roller concept is exactly the kind of innovation we need."</h3>
+      <p style="font-size:0.93rem;color:rgba(245,249,252,0.75);line-height:1.8;font-weight:300;max-width:750px;margin-bottom:2rem;">The CU Boulder Nordic Ski Club expressed strong enthusiasm for our direction, particularly the roller applicator with integrated heating. They were most impressed by the no-contact system and the idea of cartridge-based wax delivery. Their primary requests were around making the heating self-contained, widening coverage, and ensuring the tool works in sub-zero temperatures with gloves on. They are excited to test a refined prototype at a future club outing.</p>
+
+      <p style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;margin-bottom:1rem;">Next Steps We're Taking</p>
+      <div class="next-steps">
+        <div class="next-step">
+          <span class="next-step-arrow">→</span>
+          <p class="next-step-text">Design and 3D-print roller v2 housing with wider head (50mm) and edge scraper</p>
+        </div>
+        <div class="next-step">
+          <span class="next-step-arrow">→</span>
+          <p class="next-step-text">Source USB-C rechargeable heating element compatible with compact housing</p>
+        </div>
+        <div class="next-step">
+          <span class="next-step-arrow">→</span>
+          <p class="next-step-text">Prototype removable guide rail attachment inspired by Prototype C feedback</p>
+        </div>
+        <div class="next-step">
+          <span class="next-step-arrow">→</span>
+          <p class="next-step-text">Test prototype with club members at Eldora Mountain and gather quantitative feedback</p>
+        </div>
+        <div class="next-step">
+          <span class="next-step-arrow">→</span>
+          <p class="next-step-text">Evaluate disposable pad concept as a low-cost complementary accessory</p>
+        </div>
+        <div class="next-step">
+          <span class="next-step-arrow">→</span>
+          <p class="next-step-text">Present refined prototype and test results at next client review session</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-brand">WaxSmart<br>Applicator</p>
+      <p class="footer-sub">GEEN 2400<br>Engineering Projects for Community<br>University of Colorado Boulder<br>Spring 2026</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Navigation</p>
+      <ul class="footer-col-links">
+        <li><a href="#" onclick="showPage('home')">Home</a></li>
+        <li><a href="#" onclick="showPage('client')">Client</a></li>
+        <li><a href="#" onclick="showPage('problems')">Problems</a></li>
+        <li><a href="#" onclick="showPage('solutions')">Solutions</a></li>
+        <li><a href="#" onclick="showPage('prototypes')">Prototypes</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Project Details</p>
+      <ul class="footer-col-links">
+        <li><a href="#">CU Boulder Nordic Ski Club</a></li>
+        <li><a href="#">GEEN 2400 Course</a></li>
+        <li><a href="#">Engineering Design Process</a></li>
+        <li><a href="#">Contact the Team</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 GEEN 2400 Team · CU Boulder · All rights reserved</p>
+    <p class="footer-copy">Designed for CU Boulder Nordic Ski Club</p>
+  </div>
+</footer>
+
+<script>
+  // ── NAVIGATION ──
+  function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + pageId).classList.add('active');
+    document.getElementById('nav-' + pageId).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(checkScrollReveal, 100);
+  }
+
+  // ── NAV SCROLL EFFECT ──
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+    checkScrollReveal();
+  });
+
+  // ── SCROLL REVEAL ──
+  function checkScrollReveal() {
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.88) {
+        el.classList.add('visible');
+      }
+    });
+  }
+  setTimeout(checkScrollReveal, 200);
+
+  // ── SNOW PARTICLES ──
+  const snowContainer = document.getElementById('snow');
+  for (let i = 0; i < 40; i++) {
+    const f = document.createElement('div');
+    f.className = 'flake';
+    const size = Math.random() * 3 + 1;
+    f.style.cssText = `
+      width: ${size}px; height: ${size}px;
+      left: ${Math.random() * 100}%;
+      animation-duration: ${Math.random() * 8 + 6}s;
+      animation-delay: ${Math.random() * 10}s;
+      opacity: ${Math.random() * 0.5 + 0.2};
+    `;
+    snowContainer.appendChild(f);
+  }
+</script>
+
+</body>
+</html>
