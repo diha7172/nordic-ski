@@ -30,7 +30,7 @@
     overflow-x: hidden;
   }
 
-  /* NAV */
+  /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
@@ -41,137 +41,1128 @@
     transition: padding 0.3s;
   }
   nav.scrolled { padding: 0.8rem 3rem; }
-  .nav-logo { font-family: 'Space Mono', monospace; font-size: 0.78rem; letter-spacing: 0.12em; color: var(--frost); text-transform: uppercase; line-height: 1.4; }
+
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--frost);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
   .nav-logo span { color: var(--accent); }
+
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a { font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,249,252,0.7); text-decoration: none; transition: color 0.2s; position: relative; padding-bottom: 4px; }
-  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--accent); transform: scaleX(0); transition: transform 0.25s; }
+  .nav-links a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,249,252,0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+    padding-bottom: 4px;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1px; background: var(--accent);
+    transform: scaleX(0); transition: transform 0.25s;
+  }
   .nav-links a:hover { color: var(--white); }
   .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
   .nav-links a.active { color: var(--white); }
 
-  /* PAGE SECTIONS */
+  /* ── PAGE SECTIONS ── */
   .page { display: none; padding-top: 72px; min-height: 100vh; }
   .page.active { display: block; }
 
-  /* HERO */
-  .hero { position: relative; height: calc(100vh - 72px); display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; background: linear-gradient(160deg, #0a1f3c 0%, #0e3050 45%, #0d4a60 100%); }
-  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 20% 80%, rgba(79,195,232,0.08) 0%, transparent 60%), radial-gradient(ellipse 60% 80% at 80% 20%, rgba(26,107,124,0.12) 0%, transparent 60%); }
+  /* ── HERO ── */
+  .hero {
+    position: relative; height: calc(100vh - 72px);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    overflow: hidden;
+    background: linear-gradient(160deg, #0a1f3c 0%, #0e3050 45%, #0d4a60 100%);
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(79,195,232,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 80% 20%, rgba(26,107,124,0.12) 0%, transparent 60%);
+  }
+
+  /* Geometric shapes */
   .hero-shapes { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-  .shape { position: absolute; border: 1px solid rgba(79,195,232,0.1); }
-  .shape-1 { width: 500px; height: 500px; border-radius: 50%; top: -120px; right: -100px; background: radial-gradient(circle, rgba(79,195,232,0.04) 0%, transparent 70%); animation: floatA 18s ease-in-out infinite; }
-  .shape-2 { width: 300px; height: 300px; bottom: -60px; left: -60px; background: radial-gradient(circle, rgba(26,107,124,0.08) 0%, transparent 70%); border-radius: 50%; animation: floatB 14s ease-in-out infinite; }
-  .shape-3 { width: 200px; height: 200px; top: 30%; left: 10%; border: 1px solid rgba(79,195,232,0.08); transform: rotate(45deg); animation: floatC 20s ease-in-out infinite; }
+  .shape {
+    position: absolute;
+    border: 1px solid rgba(79,195,232,0.1);
+  }
+  .shape-1 {
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    top: -120px; right: -100px;
+    background: radial-gradient(circle, rgba(79,195,232,0.04) 0%, transparent 70%);
+    animation: floatA 18s ease-in-out infinite;
+  }
+  .shape-2 {
+    width: 300px; height: 300px;
+    bottom: -60px; left: -60px;
+    background: radial-gradient(circle, rgba(26,107,124,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatB 14s ease-in-out infinite;
+  }
+  .shape-3 {
+    width: 200px; height: 200px;
+    top: 30%; left: 10%;
+    border: 1px solid rgba(79,195,232,0.08);
+    transform: rotate(45deg);
+    animation: floatC 20s ease-in-out infinite;
+  }
+
+  /* Snow particles */
   .snow { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-  .flake { position: absolute; background: white; border-radius: 50%; opacity: 0; animation: fall linear infinite; }
+  .flake {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: fall linear infinite;
+  }
 
   @keyframes floatA { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-30px) scale(1.04)} }
   @keyframes floatB { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-20px) rotate(10deg)} }
   @keyframes floatC { 0%,100%{transform:rotate(45deg) scale(1)} 50%{transform:rotate(65deg) scale(1.1)} }
-  @keyframes fall { 0% { transform: translateY(-20px) translateX(0); opacity: 0.6; } 100% { transform: translateY(110vh) translateX(40px); opacity: 0; } }
+  @keyframes fall {
+    0% { transform: translateY(-20px) translateX(0); opacity: 0.6; }
+    100% { transform: translateY(110vh) translateX(40px); opacity: 0; }
+  }
 
-  .hero-content { position: relative; z-index: 2; text-align: center; padding: 2rem; animation: fadeUp 1s ease both; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-  .hero-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 0.25em; color: var(--accent); text-transform: uppercase; margin-bottom: 1.5rem; animation: fadeUp 1s 0.2s ease both; }
-  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 900; color: var(--white); line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 1.5rem; animation: fadeUp 1s 0.35s ease both; }
-  .hero-title em { font-style: italic; color: var(--accent); }
-  .hero-sub { font-size: 1.05rem; color: rgba(245,249,252,0.65); font-weight: 300; max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.7; animation: fadeUp 1s 0.5s ease both; }
-  .hero-cta { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.85rem 2rem; background: transparent; border: 1px solid var(--accent); color: var(--accent); font-family: 'Space Mono', monospace; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: all 0.25s; animation: fadeUp 1s 0.65s ease both; }
-  .hero-cta:hover { background: var(--accent); color: var(--deep); }
-  .hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; z-index: 2; animation: fadeUp 1s 1s ease both; }
-  .hero-scroll span { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; color: rgba(245,249,252,0.4); text-transform: uppercase; }
-  .scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, rgba(79,195,232,0.5), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; padding: 2rem;
+    animation: fadeUp 1s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 1s 0.35s ease both;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: rgba(245,249,252,0.65);
+    font-weight: 300;
+    max-width: 520px; margin: 0 auto 2.5rem;
+    line-height: 1.7;
+    animation: fadeUp 1s 0.5s ease both;
+  }
+
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.85rem 2rem;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    animation: fadeUp 1s 0.65s ease both;
+  }
+  .hero-cta:hover {
+    background: var(--accent);
+    color: var(--deep);
+  }
+
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    z-index: 2;
+    animation: fadeUp 1s 1s ease both;
+  }
+  .hero-scroll span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.2em;
+    color: rgba(245,249,252,0.4); text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, rgba(79,195,232,0.5), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
   @keyframes scrollPulse { 0%,100%{opacity:0.5;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(0.6)} }
 
-  /* SECTIONS, CARDS, FOOTER ETC omitted for brevity; include your original CSS from above here */
+  /* ── MISSION STRIP ── */
+  .mission-strip {
+    background: var(--deep);
+    padding: 4rem 0;
+    overflow: hidden;
+  }
+  .mission-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 2fr;
+    gap: 4rem; align-items: center;
+    padding: 0 3rem;
+  }
+  .mission-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .mission-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: var(--white);
+    line-height: 1.1;
+    font-weight: 700;
+  }
+  .mission-text {
+    font-size: 1rem;
+    color: rgba(245,249,252,0.72);
+    line-height: 1.8;
+    font-weight: 300;
+    border-left: 2px solid var(--teal);
+    padding-left: 1.5rem;
+  }
+  .mission-text + .mission-text { margin-top: 1.2rem; }
 
+  /* ── SECTION BASE ── */
+  section {
+    max-width: 1100px; margin: 0 auto;
+    padding: 5rem 3rem;
+  }
+
+  .section-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.25em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    color: var(--deep);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .divider {
+    width: 60px; height: 2px;
+    background: linear-gradient(to right, var(--accent), transparent);
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── PAGE HEROES ── */
+  .page-hero {
+    height: 360px;
+    display: flex; align-items: flex-end;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #0a1f3c 0%, #0e3050 60%, #0c4055 100%);
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 80% at 80% 50%, rgba(79,195,232,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 20% 80%, rgba(26,107,124,0.1) 0%, transparent 60%);
+  }
+  .page-hero-content { position: relative; z-index: 1; max-width: 1100px; width: 100%; margin: 0 auto; }
+  .page-hero-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem; font-weight: 900;
+    color: rgba(79,195,232,0.06);
+    position: absolute; right: 3rem; bottom: -1rem;
+    line-height: 1; pointer-events: none;
+    font-style: italic;
+  }
+  .page-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.0;
+    margin-bottom: 0.5rem;
+  }
+  .page-hero p {
+    font-size: 0.9rem;
+    color: rgba(245,249,252,0.55);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* ── CARDS ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .card {
+    background: white;
+    border: 1px solid rgba(10,31,60,0.08);
+    padding: 2.2rem;
+    position: relative;
+    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 2px 20px rgba(10,31,60,0.05);
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(10,31,60,0.12);
+  }
+  .card-icon {
+    font-size: 2rem; margin-bottom: 1.2rem;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--deep); margin-bottom: 0.8rem;
+  }
+  .card-text {
+    font-size: 0.92rem; color: var(--muted);
+    line-height: 1.75; font-weight: 300;
+  }
+  .card-accent {
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  /* ── ABOUT CLIENT ── */
+  .client-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-top: 3rem;
+  }
+  .client-block { }
+  .client-block-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .client-block-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--deep); margin-bottom: 1rem;
+  }
+  .client-block-text {
+    font-size: 0.95rem; color: var(--muted);
+    line-height: 1.8; font-weight: 300;
+  }
+
+  .stat-row {
+    display: flex; gap: 2rem; margin-top: 3rem;
+  }
+  .stat {
+    flex: 1; padding: 1.8rem;
+    background: var(--deep);
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem; font-weight: 900;
+    color: var(--accent);
+    font-style: italic;
+  }
+  .stat-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem; color: rgba(245,249,252,0.6);
+    margin-top: 0.3rem; text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .gap-box {
+    margin-top: 3rem;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, var(--deep) 0%, var(--slate) 100%);
+    position: relative; overflow: hidden;
+  }
+  .gap-box::after {
+    content: '⚠';
+    position: absolute; right: 2rem; top: 50%;
+    transform: translateY(-50%);
+    font-size: 6rem; opacity: 0.05; pointer-events: none;
+  }
+  .gap-box-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .gap-box-text {
+    font-size: 1rem; color: rgba(245,249,252,0.85);
+    line-height: 1.8; font-weight: 300;
+    max-width: 700px;
+  }
+
+  /* ── PROBLEMS ── */
+  .problem-intro {
+    max-width: 800px;
+    font-size: 1.05rem; color: var(--muted);
+    line-height: 1.85; font-weight: 300;
+    margin-top: 2rem;
+  }
+  .problem-intro strong { color: var(--deep); font-weight: 500; }
+
+  .problem-list {
+    margin-top: 3.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .problem-item {
+    padding: 2rem;
+    border: 1px solid rgba(10,31,60,0.1);
+    position: relative;
+    background: white;
+    box-shadow: 0 2px 12px rgba(10,31,60,0.04);
+    transition: all 0.25s;
+  }
+  .problem-item:hover { box-shadow: 0 8px 30px rgba(10,31,60,0.1); transform: translateY(-3px); }
+  .problem-item-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; font-weight: 900;
+    color: rgba(10,31,60,0.04);
+    position: absolute; top: 1rem; right: 1.5rem;
+    font-style: italic; line-height: 1;
+  }
+  .problem-item-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .problem-item-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--deep); margin-bottom: 0.6rem;
+  }
+  .problem-item-text { font-size: 0.88rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+  .problem-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--teal), var(--accent));
+    transform: scaleX(0);
+    transition: transform 0.4s;
+    transform-origin: left;
+  }
+  .problem-item:hover .problem-bar { transform: scaleX(1); }
+
+  .klister-explainer {
+    margin-top: 4rem;
+    padding: 3rem;
+    background: linear-gradient(135deg, #0a1f3c 0%, #0e3a55 100%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: center;
+  }
+  .ke-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; font-weight: 700;
+    color: var(--white); margin-bottom: 1rem;
+    font-style: italic;
+  }
+  .ke-text { font-size: 0.93rem; color: rgba(245,249,252,0.72); line-height: 1.8; font-weight: 300; }
+  .ke-step-list { display: flex; flex-direction: column; gap: 1rem; }
+  .ke-step {
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .ke-step-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    padding: 0.3rem 0.5rem;
+    border: 1px solid rgba(79,195,232,0.3);
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .ke-step-text { font-size: 0.88rem; color: rgba(245,249,252,0.7); line-height: 1.6; font-weight: 300; }
+
+  /* ── SOLUTIONS ── */
+  .solutions-intro {
+    max-width: 750px;
+    font-size: 1.05rem; color: var(--muted);
+    line-height: 1.85; font-weight: 300; margin-top: 2rem;
+  }
+
+  .solution-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .feature {
+    padding: 2.5rem 2rem;
+    background: white;
+    border: 1px solid rgba(10,31,60,0.08);
+    text-align: center;
+    transition: all 0.25s;
+    box-shadow: 0 2px 12px rgba(10,31,60,0.04);
+  }
+  .feature:hover { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(10,31,60,0.1); }
+  .feature-icon { font-size: 2.5rem; margin-bottom: 1.2rem; }
+  .feature-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--deep); margin-bottom: 0.7rem;
+  }
+  .feature-text { font-size: 0.88rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+  .design-brief {
+    margin-top: 4rem;
+    padding: 3.5rem;
+    background: var(--deep);
+    display: grid;
+    grid-template-columns: 1fr 2px 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .brief-divider { background: rgba(79,195,232,0.2); }
+  .brief-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .brief-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 700;
+    color: var(--white); margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .brief-text { font-size: 0.9rem; color: rgba(245,249,252,0.65); line-height: 1.8; font-weight: 300; }
+
+  .criteria-list {
+    display: flex; flex-direction: column; gap: 0.8rem;
+  }
+  .criteria-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.9rem 1.2rem;
+    background: rgba(79,195,232,0.05);
+    border-left: 2px solid rgba(79,195,232,0.3);
+  }
+  .criteria-check { color: var(--accent); font-size: 1rem; }
+  .criteria-text { font-size: 0.87rem; color: rgba(245,249,252,0.75); font-weight: 300; }
+
+  /* ── PROTOTYPES ── */
+  .proto-intro {
+    max-width: 750px;
+    font-size: 1.05rem; color: var(--muted);
+    line-height: 1.85; font-weight: 300; margin-top: 2rem;
+  }
+
+  .proto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3.5rem;
+  }
+
+  .proto-card {
+    border: 1px solid rgba(10,31,60,0.1);
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 16px rgba(10,31,60,0.05);
+    transition: all 0.3s;
+  }
+  .proto-card:hover { box-shadow: 0 16px 50px rgba(10,31,60,0.12); transform: translateY(-4px); }
+
+  .proto-card-header {
+    background: linear-gradient(135deg, var(--deep) 0%, var(--slate) 100%);
+    padding: 2rem;
+    position: relative; overflow: hidden;
+  }
+  .proto-card-header::before {
+    content: attr(data-num);
+    position: absolute; right: 1.5rem; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem; font-weight: 900; font-style: italic;
+    color: rgba(255,255,255,0.05); line-height: 1;
+  }
+  .proto-status {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.2em;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .proto-status.preferred { color: #5ce8a0; border-color: rgba(92,232,160,0.4); }
+  .proto-status.considered { color: var(--accent); border-color: rgba(79,195,232,0.4); }
+  .proto-status.declined { color: #e87c5c; border-color: rgba(232,124,92,0.4); }
+
+  .proto-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--white); line-height: 1.2;
+  }
+  .proto-card-body { padding: 2rem; }
+
+  .proto-section {
+    margin-bottom: 1.5rem;
+  }
+  .proto-section:last-child { margin-bottom: 0; }
+  .proto-section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .proto-section-text {
+    font-size: 0.88rem; color: var(--muted);
+    line-height: 1.7; font-weight: 300;
+  }
+
+  .feedback-box {
+    margin-top: 4rem;
+    padding: 3rem;
+    background: linear-gradient(135deg, #0d3552 0%, #0a2540 100%);
+    border-left: 3px solid var(--gold);
+  }
+  .feedback-box-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+  .feedback-box-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--white); margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .next-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  .next-step {
+    padding: 1.3rem;
+    background: rgba(79,195,232,0.05);
+    border: 1px solid rgba(79,195,232,0.12);
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .next-step-arrow {
+    color: var(--accent); font-size: 1rem; flex-shrink: 0; margin-top: 2px;
+  }
+  .next-step-text {
+    font-size: 0.85rem; color: rgba(245,249,252,0.75); line-height: 1.6; font-weight: 300;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep);
+    padding: 4rem 3rem 3rem;
+    margin-top: 0;
+    border-top: 1px solid rgba(79,195,232,0.1);
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+  }
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--white); margin-bottom: 0.8rem;
+    font-style: italic;
+  }
+  .footer-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.15em;
+    color: rgba(245,249,252,0.4); text-transform: uppercase;
+    line-height: 1.6;
+  }
+  .footer-col-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .footer-col-links { list-style: none; }
+  .footer-col-links li { margin-bottom: 0.6rem; }
+  .footer-col-links a {
+    font-size: 0.88rem; color: rgba(245,249,252,0.55);
+    text-decoration: none; transition: color 0.2s;
+    font-weight: 300;
+  }
+  .footer-col-links a:hover { color: var(--white); }
+  .footer-bottom {
+    max-width: 1100px; margin: 3rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-copy {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.1em;
+    color: rgba(245,249,252,0.3);
+  }
+
+  /* ── PLACEHOLDER ── */
+  .placeholder-box { text-align:center; padding:5rem 2rem; background:white; border:2px dashed rgba(10,31,60,0.12); max-width:600px; margin:0 auto; }
+  .placeholder-icon { font-size:2.5rem; color:var(--accent); margin-bottom:1.2rem; }
+  .placeholder-title { font-family:"Playfair Display",serif; font-size:1.5rem; font-weight:700; color:var(--deep); margin-bottom:0.8rem; }
+  .placeholder-text { font-size:0.95rem; color:var(--muted); line-height:1.8; font-weight:300; }
+  /* ── TEAM ── */
+  .team-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:2rem; }
+  .team-card { background:white; border:1px solid rgba(10,31,60,0.08); box-shadow:0 2px 16px rgba(10,31,60,0.05); transition:all 0.25s; overflow:hidden; }
+  .team-card:hover { transform:translateY(-4px); box-shadow:0 12px 36px rgba(10,31,60,0.12); }
+  .team-photo-wrap { width:100%; aspect-ratio:1/1; background:var(--deep); overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  .team-photo { width:100%; height:100%; object-fit:cover; }
+  .team-photo-placeholder { font-size:4rem; color:rgba(79,195,232,0.3); font-family:"Playfair Display",serif; }
+  .team-info { padding:1.5rem; }
+  .team-name { font-family:"Playfair Display",serif; font-size:1.2rem; font-weight:700; color:var(--deep); margin-bottom:0.3rem; }
+  .team-role { font-family:"Space Mono",monospace; font-size:0.65rem; letter-spacing:0.15em; color:var(--accent); text-transform:uppercase; margin-bottom:0.8rem; }
+  .team-bio { font-size:0.88rem; color:var(--muted); line-height:1.7; font-weight:300; }
+  /* ── SCROLLFADE ── */
+  .scroll-reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .mission-inner { grid-template-columns: 1fr; gap: 2rem; }
+    section { padding: 3rem 1.5rem; }
+    .client-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .stat-row { flex-wrap: wrap; }
+    .proto-grid { grid-template-columns: 1fr; }
+    .klister-explainer { grid-template-columns: 1fr; gap: 2rem; }
+    .design-brief { grid-template-columns: 1fr; }
+    .brief-divider { display: none; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; }
+    .hero-title { font-size: 3rem; }
+  }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ══════════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════════ -->
 <nav id="navbar">
-  <div class="nav-logo">CU Boulder<br><span>Nordic Ski Club</span></div>
+  <div class="nav-logo">
+    CU Boulder<br><span>Nordic Ski Club</span>
+  </div>
   <ul class="nav-links">
     <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
     <li><a href="#" onclick="showPage('client')" id="nav-client">Client</a></li>
     <li><a href="#" onclick="showPage('problems')" id="nav-problems">Problems</a></li>
     <li><a href="#" onclick="showPage('solutions')" id="nav-solutions">Solutions</a></li>
     <li><a href="#" onclick="showPage('prototypes')" id="nav-prototypes">Prototypes</a></li>
+    <li><a href="#" onclick="showPage('team')" id="nav-team">Our Team</a></li>
   </ul>
 </nav>
 
-<!-- PAGES -->
+<!-- ══════════════════════════════════════════
+     HOME PAGE
+══════════════════════════════════════════ -->
 <div id="page-home" class="page active">
-  <!-- Include your hero, mission-strip, and card grid here -->
+
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    <div class="snow" id="snow"></div>
+
+    <div class="hero-content">
+      <h1 class="hero-title">Wax<em>Smart</em><br>Applicator</h1>
+      <p class="hero-sub">We are redesigning how cross-country skiers apply klister wax. Our goal is to make the process cleaner, faster, and more consistent for all conditions.</p>
+      <button class="hero-cta" onclick="showPage('client')">Explore Project →</button>
+    </div>
+
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+
+  <div class="mission-strip">
+    <div class="mission-inner">
+      <div>
+        <p class="mission-label">Our Mission</p>
+        <h2 class="mission-heading">Engineering<br>for real<br>people.</h2>
+      </div>
+      <div>
+        <p class="mission-text">As part of GEEN 2400: Engineering for the Community, our team is working on a client-based design project focused on health, safety, and quality of life. We are using the engineering design process to tackle a real problem that our client brought to us.</p>
+        <p class="mission-text" style="margin-top:1.2rem;">We are working directly with the CU Boulder Nordic Ski Club to improve how skiers apply klister wax to their skis. We have been meeting regularly with our client and are building a product that is practical, easy to use, and actually solves the problems they face out on the trail.</p>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <p class="section-tag">What We're Solving</p>
+    <h2 class="section-title">Three Focus<br>Areas</h2>
+    <div class="divider"></div>
+    <div class="card-grid scroll-reveal">
+      <div class="card">
+        <div class="card-accent"></div>
+        <h3 class="card-title">Client Partnership</h3>
+        <p class="card-text">We are working directly with the CU Boulder Nordic Ski Club, founded in 2023. Getting to know them and understanding their real needs has been a big part of our process so far.</p>
+      </div>
+      <div class="card">
+        <div class="card-accent"></div>
+        <h3 class="card-title">Problem Identification</h3>
+        <p class="card-text">Klister wax application is messy, inconsistent, and takes way too long. We talked with club members and identified the specific issues that make this process so frustrating in cold outdoor conditions.</p>
+      </div>
+      <div class="card">
+        <div class="card-accent"></div>
+        <h3 class="card-title">Our Solutions</h3>
+        <p class="card-text">Our prototypes focus on cleanliness, temperature control, and ease of use. We want any skier, regardless of experience, to be able to wax their skis quickly and confidently before heading out.</p>
+      </div>
+    </div>
+  </section>
+
 </div>
 
+<!-- ══════════════════════════════════════════
+     CLIENT PAGE
+══════════════════════════════════════════ -->
 <div id="page-client" class="page">
-  <!-- Client content here -->
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="page-hero-number">01</div>
+      <p style="font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.22em;color:var(--accent);text-transform:uppercase;margin-bottom:0.8rem;">Our Partner</p>
+      <h1>CU Boulder<br>Nordic Ski Club</h1>
+      <p>Founded 2023 · Boulder, Colorado</p>
+    </div>
+  </div>
+
+  <section>
+    <p class="section-tag">About Our Client</p>
+    <h2 class="section-title">Who They Are</h2>
+    <div class="divider"></div>
+
+    <div class="client-grid scroll-reveal">
+      <div>
+        <div class="client-block" style="margin-bottom:2.5rem;">
+          <p class="client-block-label">Identity</p>
+          <h3 class="client-block-title">An All-Inclusive Ski Community</h3>
+          <p class="client-block-text">The CU Boulder Nordic Ski Club was founded in 2023 and is open to students of all Nordic ski levels. Whether you want to compete or just learn how to ski, the club has something for everyone. They host a variety of events throughout the school year and have built a strong community of skiers on campus.</p>
+        </div>
+        <div class="client-block">
+          <p class="client-block-label">Activities</p>
+          <h3 class="client-block-title">What They Do</h3>
+          <p class="client-block-text">The Nordic Ski Club runs weekly ski outings, bi-weekly day trips, two overnight trips each season, competitions, and social events. The club welcomes everyone from total beginners to experienced racers, and they all share a love of cross-country skiing in the Colorado mountains.</p>
+        </div>
+      </div>
+      <div>
+        <div class="stat-row" style="flex-direction:column;gap:1rem;">
+          <div class="stat">
+            <div class="stat-num">2023</div>
+            <div class="stat-label">Year Founded</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">Weekly</div>
+            <div class="stat-label">Ski Outings</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">All Levels</div>
+            <div class="stat-label">Welcoming Beginners to Racers</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-box scroll-reveal">
+      <p class="gap-box-label">The Capability Gap</p>
+      <p class="gap-box-text">One of the most important parts of Nordic skiing is prepping your skis before you head out. Klister wax needs to be applied to the base of the ski to give you the grip you need in icy or slushy conditions. The problem is that applying it is a messy, time-consuming process that is hard to do consistently. That is why the Nordic Ski Club came to us. They wanted help building something that makes this easier for all their members.</p>
+    </div>
+  </section>
+
 </div>
 
+<!-- ══════════════════════════════════════════
+     PROBLEMS PAGE
+══════════════════════════════════════════ -->
 <div id="page-problems" class="page">
-  <!-- Problems content here -->
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="page-hero-number">02</div>
+      <p style="font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.22em;color:var(--accent);text-transform:uppercase;margin-bottom:0.8rem;">Root Issues</p>
+      <h1>The<br>Problems</h1>
+      <p>Why klister wax needs a better solution</p>
+    </div>
+  </div>
+
+  <section>
+    <p class="section-tag">Problem Statement</p>
+    <h2 class="section-title">What Makes<br>Klister Difficult?</h2>
+    <div class="divider"></div>
+
+    <p class="problem-intro scroll-reveal">
+      <strong>Klister</strong> is a tacky wax that goes on the bottom of cross-country skis to help with grip in icy, wet, or slushy conditions where regular hard wax does not work. To apply it, you have to heat the wax first and then spread thin layers onto the middle section of the ski called the kick zone. Getting it right makes a big difference in how the ski performs.
+      <br><br>
+      Our team is working on a new product to fix the issues with how klister is currently applied. After talking with the Nordic Ski Club, we identified the core problem: <strong>klister wax is hard to apply correctly because you need precise temperature control, even spreading, and a full cleanup afterward. The whole thing is slow, inconsistent, and really inconvenient when you are standing outside in the cold.</strong>
+    </p>
+
+    <div class="problem-list scroll-reveal">
+      <div class="problem-item">
+        <div class="problem-bar"></div>
+        <div class="problem-item-num">01</div>
+        <h3 class="problem-item-title">Cleanliness</h3>
+        <p class="problem-item-text">Klister is extremely sticky and gets all over your hands, clothes, ski bags, and gear. Once it gets on something, it is almost impossible to remove without a solvent. This is probably the biggest complaint we heard from club members.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-bar"></div>
+        <div class="problem-item-num">02</div>
+        <h3 class="problem-item-title">Temperature Control</h3>
+        <p class="problem-item-text">Klister has to be at just the right temperature before it spreads properly. If it is too cold it will not move. If it gets too hot it drips everywhere. Trying to get that right while standing outside in winter is really difficult.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-bar"></div>
+        <div class="problem-item-num">03</div>
+        <h3 class="problem-item-title">Time Consumption</h3>
+        <p class="problem-item-text">The current process takes anywhere from 15 to 30 minutes. You have to heat the wax, spread it in layers, wait for it to set, and then clean everything up. That is a lot of time to spend in a cold parking lot before a ski outing.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-bar"></div>
+        <div class="problem-item-num">04</div>
+        <h3 class="problem-item-title">Inconsistent Results</h3>
+        <p class="problem-item-text">Without a good tool, it is hard to get even coverage every time. If the wax is uneven, your skis will not perform as well and you end up having to scrape it off and start over, which wastes both time and wax.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-bar"></div>
+        <div class="problem-item-num">05</div>
+        <h3 class="problem-item-title">Outdoor Inconvenience</h3>
+        <p class="problem-item-text">Most people apply klister at trailheads or in parking lots. If you wear gloves you cannot spread the wax properly, but if you take them off your hands get covered in klister. None of the current tools are designed with outdoor use in mind.</p>
+      </div>
+      <div class="problem-item">
+        <div class="problem-bar"></div>
+        <div class="problem-item-num">06</div>
+        <h3 class="problem-item-title">Portability</h3>
+        <p class="problem-item-text">Klister tubes can leak in ski bags and contaminate everything inside. There is no good way to carry everything you need in one contained unit that will not make a mess on the way to the trailhead.</p>
+      </div>
+    </div>
+
+    <div class="klister-explainer scroll-reveal">
+      <div>
+        <h3 class="ke-title">How Klister Is Applied Right Now</h3>
+        <p class="ke-text">Looking at the current process step by step makes it clear why skiers find it so frustrating. Our goal is to simplify as many of these steps as we can.</p>
+      </div>
+      <div class="ke-step-list">
+        <div class="ke-step">
+          <span class="ke-step-num">01</span>
+          <p class="ke-step-text">Warm the klister tube with body heat or a small torch until pliable</p>
+        </div>
+        <div class="ke-step">
+          <span class="ke-step-num">02</span>
+          <p class="ke-step-text">Squeeze thin beads of wax onto the kick zone of the ski base</p>
+        </div>
+        <div class="ke-step">
+          <span class="ke-step-num">03</span>
+          <p class="ke-step-text">Spread evenly with a scraper or finger (major contamination risk)</p>
+        </div>
+        <div class="ke-step">
+          <span class="ke-step-num">04</span>
+          <p class="ke-step-text">Allow to partially set before skiing</p>
+        </div>
+        <div class="ke-step">
+          <span class="ke-step-num">05</span>
+          <p class="ke-step-text">Clean all tools, hands, and any contaminated surfaces after use</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>
 
+<!-- ══════════════════════════════════════════
+     SOLUTIONS PAGE
+══════════════════════════════════════════ -->
 <div id="page-solutions" class="page">
-  <!-- Solutions content here -->
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="page-hero-number">03</div>
+      <p style="font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.22em;color:var(--accent);text-transform:uppercase;margin-bottom:0.8rem;">Our Approach</p>
+      <h1>The<br>Solutions</h1>
+      <p>Coming soon</p>
+    </div>
+  </div>
+
+  <section>
+    <p class="section-tag">Content Coming Soon</p>
+    <h2 class="section-title">Solutions</h2>
+    <div class="divider"></div>
+    <div class="placeholder-box">
+      <div class="placeholder-icon">&#9998;</div>
+      <h3 class="placeholder-title">This section is being updated</h3>
+      <p class="placeholder-text">Our team is still working on finalizing our solution details. Check back soon for a full breakdown of our design approach, engineering criteria, and final concept.</p>
+    </div>
+  </section>
+
 </div>
 
+<!-- ══════════════════════════════════════════
+     PROTOTYPES PAGE
+══════════════════════════════════════════ -->
 <div id="page-prototypes" class="page">
-  <!-- Prototypes content here -->
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="page-hero-number">04</div>
+      <p style="font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.22em;color:var(--accent);text-transform:uppercase;margin-bottom:0.8rem;">Design Iterations</p>
+      <h1>Prototypes &amp;<br>Client Feedback</h1>
+      <p>Coming soon</p>
+    </div>
+  </div>
+
+  <section>
+    <p class="section-tag">Content Coming Soon</p>
+    <h2 class="section-title">Prototypes</h2>
+    <div class="divider"></div>
+    <div class="placeholder-box">
+      <div class="placeholder-icon">&#9998;</div>
+      <h3 class="placeholder-title">This section is being updated</h3>
+      <p class="placeholder-text">Our prototype details and client feedback are being added shortly. This page will include photos, descriptions, and a full summary of what the client thought about each concept.</p>
+    </div>
+  </section>
+
 </div>
 
-<!-- FOOTER -->
+<!-- ══════════════════════════════════════════
+     OUR TEAM PAGE
+══════════════════════════════════════════ -->
+<div id="page-team" class="page">
+
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="page-hero-number">05</div>
+      <p style="font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.22em;color:var(--accent);text-transform:uppercase;margin-bottom:0.8rem;">GEEN 2400</p>
+      <h1>Our<br>Team</h1>
+      <p>Coming soon</p>
+    </div>
+  </div>
+
+  <section>
+    <p class="section-tag">Content Coming Soon</p>
+    <h2 class="section-title">Our Team</h2>
+    <div class="divider"></div>
+    <div class="placeholder-box">
+      <div class="placeholder-icon">&#9998;</div>
+      <h3 class="placeholder-title">This section is being updated</h3>
+      <p class="placeholder-text">Team member profiles and headshots are being added shortly. Check back soon to meet the people behind the WaxSmart Applicator project.</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
 <footer>
   <div class="footer-inner">
     <div>
-      <div class="footer-brand">CU Boulder Nordic Ski Club</div>
-      <div class="footer-sub">GEEN 2400 Design Project<br>Winter 2026</div>
+      <p class="footer-brand">WaxSmart<br>Applicator</p>
     </div>
     <div>
-      <div class="footer-col-title">Sections</div>
+      <p class="footer-col-title">Navigation</p>
       <ul class="footer-col-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Client</a></li>
-        <li><a href="#">Problems</a></li>
-        <li><a href="#">Solutions</a></li>
-        <li><a href="#">Prototypes</a></li>
+        <li><a href="#" onclick="showPage('home')">Home</a></li>
+        <li><a href="#" onclick="showPage('client')">Client</a></li>
+        <li><a href="#" onclick="showPage('problems')">Problems</a></li>
+        <li><a href="#" onclick="showPage('solutions')">Solutions</a></li>
+        <li><a href="#" onclick="showPage('prototypes')">Prototypes</a></li>
+        <li><a href="#" onclick="showPage('team')">Our Team</a></li>
       </ul>
     </div>
-    <div>
-      <div class="footer-col-title">Project</div>
-      <ul class="footer-col-links">
-        <li><a href="#">Design Brief</a></li>
-        <li><a href="#">Testing</a></li>
-        <li><a href="#">Next Steps</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 GEEN 2400 Team · CU Boulder Nordic Ski Club</p>
   </div>
 </footer>
 
 <script>
-  // Page switching
-  function showPage(page) {
+  // ── NAVIGATION ──
+  function showPage(pageId) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('page-' + page).classList.add('active');
     document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-    document.getElementById('nav-' + page).classList.add('active');
+    document.getElementById('page-' + pageId).classList.add('active');
+    document.getElementById('nav-' + pageId).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(checkScrollReveal, 100);
   }
 
-  // Snow particles
+  // ── NAV SCROLL EFFECT ──
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+    checkScrollReveal();
+  });
+
+  // ── SCROLL REVEAL ──
+  function checkScrollReveal() {
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.88) {
+        el.classList.add('visible');
+      }
+    });
+  }
+  setTimeout(checkScrollReveal, 200);
+
+  // ── SNOW PARTICLES ──
   const snowContainer = document.getElementById('snow');
-  for(let i=0;i<50;i++){
-    const flake = document.createElement('div');
-    flake.className = 'flake';
-    flake.style.width = flake.style.height = `${Math.random()*4 + 2}px`;
-    flake.style.left = `${Math.random()*100}%`;
-    flake.style.animationDuration = `${Math.random()*5+5}s`;
-    flake.style.animationDelay = `${Math.random()*5}s`;
-    snowContainer.appendChild(flake);
+  for (let i = 0; i < 40; i++) {
+    const f = document.createElement('div');
+    f.className = 'flake';
+    const size = Math.random() * 3 + 1;
+    f.style.cssText = `
+      width: ${size}px; height: ${size}px;
+      left: ${Math.random() * 100}%;
+      animation-duration: ${Math.random() * 8 + 6}s;
+      animation-delay: ${Math.random() * 10}s;
+      opacity: ${Math.random() * 0.5 + 0.2};
+    `;
+    snowContainer.appendChild(f);
   }
 </script>
 
